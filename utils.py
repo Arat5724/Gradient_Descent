@@ -41,7 +41,8 @@ def mse(y: ndarray, y_hat: ndarray) -> float:
     return np.dot(cost, cost) / y.shape[0]
 
 
-def draw(x, x_prime_T, y, y_hat, m):
+def draw(x, x_prime_T, y, m):
+    y_hat = np.zeros_like(y)
     fig = plt.figure(figsize=(10, 6))
     ax2 = fig.add_subplot(121)
     ax3 = fig.add_subplot(122, projection="3d")
@@ -71,7 +72,8 @@ def draw(x, x_prime_T, y, y_hat, m):
     return fig, ax2, ax3, line2, line3
 
 
-def draw2(x, y, y_hat, theta, fig, ax2, line2, line3):
+def draw2(x, x_prime, y, theta, fig, ax2, line2, line3):
+    y_hat = x_prime.dot(theta)
     mse_ = mse(y, y_hat)
     ax2.set_title(f"MSE: {mse_}")
     line2.set_data(x, y_hat)
